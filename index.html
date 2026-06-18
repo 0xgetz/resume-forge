@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ResumeForge — Free AI Resume &amp; Cover Letter Builder</title>
+  <meta name="description" content="Build a professional resume and AI-assisted cover letter in your browser. 100% free, no sign-up, your data never leaves your device." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">⚒️</span>
+      <span class="brand-name">ResumeForge</span>
+      <span class="badge">Free</span>
+    </div>
+    <nav class="actions">
+      <button id="tab-resume" class="tab active" data-view="resume">Resume</button>
+      <button id="tab-cover" class="tab" data-view="cover">Cover Letter</button>
+      <span class="divider"></span>
+      <button id="btn-import" class="btn ghost" title="Import data from JSON">Import</button>
+      <button id="btn-export-json" class="btn ghost" title="Export data to JSON">Export</button>
+      <button id="btn-print" class="btn primary" title="Download / Print as PDF">Download PDF</button>
+      <input type="file" id="file-import" accept="application/json" hidden />
+    </nav>
+  </header>
+
+  <main class="app">
+    <!-- ============ EDITOR ============ -->
+    <section class="editor" id="editor">
+      <!-- Resume editor -->
+      <div class="panel" id="panel-resume">
+        <div class="field-row">
+          <label>Template</label>
+          <select id="template-select">
+            <option value="modern">Modern</option>
+            <option value="classic">Classic</option>
+            <option value="compact">Compact</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <label>Accent color</label>
+          <input type="color" id="accent-color" value="#2563eb" />
+        </div>
+
+        <fieldset>
+          <legend>Personal details</legend>
+          <input id="f-name" placeholder="Full name" />
+          <input id="f-title" placeholder="Professional title (e.g. Senior Product Designer)" />
+          <div class="grid-2">
+            <input id="f-email" placeholder="Email" />
+            <input id="f-phone" placeholder="Phone" />
+          </div>
+          <div class="grid-2">
+            <input id="f-location" placeholder="Location" />
+            <input id="f-website" placeholder="Website / LinkedIn" />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Professional summary</legend>
+          <textarea id="f-summary" rows="4" placeholder="A short paragraph summarizing your experience and strengths."></textarea>
+        </fieldset>
+
+        <fieldset>
+          <legend>Work experience</legend>
+          <div id="experience-list"></div>
+          <button class="btn ghost add" data-add="experience">+ Add experience</button>
+        </fieldset>
+
+        <fieldset>
+          <legend>Education</legend>
+          <div id="education-list"></div>
+          <button class="btn ghost add" data-add="education">+ Add education</button>
+        </fieldset>
+
+        <fieldset>
+          <legend>Skills</legend>
+          <input id="f-skills" placeholder="Comma-separated, e.g. Figma, React, User Research" />
+        </fieldset>
+      </div>
+
+      <!-- Cover letter editor -->
+      <div class="panel" id="panel-cover" hidden>
+        <fieldset>
+          <legend>Cover letter target</legend>
+          <div class="grid-2">
+            <input id="c-company" placeholder="Company name" />
+            <input id="c-role" placeholder="Role you're applying for" />
+          </div>
+          <input id="c-manager" placeholder="Hiring manager name (optional)" />
+          <textarea id="c-highlights" rows="3" placeholder="Key points to highlight (optional): biggest wins, why this company, etc."></textarea>
+        </fieldset>
+
+        <fieldset>
+          <legend>AI assist <span class="muted">(optional, bring your own key)</span></legend>
+          <p class="hint">Your key is stored only in this browser (localStorage) and is sent directly to the provider you choose. It never touches any ResumeForge server — there is no server.</p>
+          <div class="field-row">
+            <label>Provider</label>
+            <select id="ai-provider">
+              <option value="openai">OpenAI</option>
+              <option value="anthropic">Anthropic (Claude)</option>
+            </select>
+          </div>
+          <input id="ai-key" type="password" placeholder="API key (sk-... )" />
+          <button id="btn-generate" class="btn primary full">✨ Generate cover letter draft</button>
+          <p id="ai-status" class="hint"></p>
+        </fieldset>
+
+        <fieldset>
+          <legend>Cover letter text</legend>
+          <textarea id="c-body" rows="14" placeholder="Write or generate your cover letter here..."></textarea>
+        </fieldset>
+      </div>
+    </section>
+
+    <!-- ============ PREVIEW ============ -->
+    <section class="preview-wrap">
+      <div id="preview" class="page"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>ResumeForge · 100% free &amp; open source · Your data stays in your browser.</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
