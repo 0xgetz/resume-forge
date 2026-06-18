@@ -4,17 +4,20 @@
 
 No sign-up. No backend. No database. Your data never leaves your device — there is literally no server to send it to. Host it for free on GitHub Pages, Netlify, or Vercel.
 
-[**▶ Live demo**](#deploy-for-free) · [Features](#features) · [Quick start](#quick-start) · [How it makes money](#monetization-honest-version)
+[Features](#features) · [Quick start](#quick-start) · [Deploy free](#deploy-for-free) · [How it makes money](#monetization-honest-version)
 
 ---
 
 ## Features
 
 - 📝 **Live resume editor** — personal details, summary, experience, education, and skills with an instant A4 preview.
-- 🎨 **Templates & accent color** — Modern, Classic, and Compact layouts; pick any accent color.
-- ✨ **AI cover letter assist** — generate a tailored draft using **your own** OpenAI or Anthropic API key. The key is stored only in your browser's `localStorage` and is sent directly to the provider — never to any ResumeForge server (there isn't one).
-- 💾 **Autosave + import/export** — everything is saved locally; export your data as JSON and re-import it anytime.
-- 🖨️ **One-click PDF** — uses the browser's native print-to-PDF, so the output is crisp and free.
+- 🎨 **5 templates + accent color + photo** — Modern, Classic, Compact, **Two-column**, and **Photo-header** layouts; pick any accent color and add a profile photo.
+- 👥 **Multiple profiles** — keep separate resumes (e.g. "Design CV", "PM CV") and switch between them instantly. Create, rename, and delete profiles; each stores its own data.
+- 🎯 **ATS keyword checker** — paste a job description and get a match score plus the exact keywords you're **missing**, so you can tailor your resume before applying.
+- ✨ **AI cover letter assist** — generate a tailored draft using **your own** OpenAI or Anthropic key (in the selected UI language). The key is stored only in your browser's `localStorage` and is sent directly to the provider — never to any ResumeForge server (there isn't one).
+- 📤 **Export anywhere** — download as **PDF** (print), **Word (.doc)**, or **Markdown (.md)**. Plus JSON import/export to back up or move all your profiles.
+- 🌍 **Multi-language UI (i18n)** — English, Bahasa Indonesia, and Español, switchable on the fly.
+- 💾 **Autosave** — everything is saved locally as you type.
 - 🔒 **Private by design** — 100% client-side. Nothing is tracked, uploaded, or stored remotely.
 
 ## Quick start
@@ -22,7 +25,7 @@ No sign-up. No backend. No database. Your data never leaves your device — ther
 It's a static site — no build step, no dependencies.
 
 ```bash
-git clone https://github.com/<your-username>/resume-forge.git
+git clone https://github.com/0xgetz/resume-forge.git
 cd resume-forge
 
 # open index.html directly, or serve locally:
@@ -46,19 +49,30 @@ All of these have free tiers that comfortably handle a static site.
 ```
 resume-forge/
 ├── index.html    # markup & layout
-├── styles.css    # styling, templates, print rules
-├── app.js        # editor state, live preview, import/export, AI calls
+├── styles.css    # styling, 5 templates, print rules
+├── i18n.js       # UI translations (en / id / es)
+├── app.js        # state, profiles, preview, ATS, exports, AI calls
 ├── LICENSE       # MIT
 └── README.md
 ```
+
+## ATS keyword checker
+
+Open the **ATS Check** tab, paste a job description, and click **Analyze**. ResumeForge extracts the most important terms (single words and notable phrases), checks which already appear in your resume, and shows:
+
+- a **match score** (found ÷ total keywords),
+- the keywords **found** in your resume (green),
+- the keywords **missing** (red) — weave these into your summary, experience, or skills.
+
+All analysis runs locally in your browser; the job description is never uploaded.
 
 ## AI: bring your own key
 
 ResumeForge does **not** ship with an API key and does **not** proxy your requests. When you generate a cover letter:
 
 1. You paste your own OpenAI or Anthropic key into the AI panel.
-2. The request goes **directly** from your browser to that provider.
-3. The key is kept in `localStorage` and never exported with your resume data.
+2. The request goes **directly** from your browser to that provider, in your selected UI language.
+3. The key is kept in `localStorage` and is never exported with your resume data.
 
 This keeps the tool genuinely free to run — you only pay your provider for the tokens you use (typically a fraction of a cent per cover letter).
 
@@ -69,20 +83,24 @@ This keeps the tool genuinely free to run — you only pay your provider for the
 This repo is the **product**, not a money machine. Open-source code alone does not generate revenue — distribution and execution do. Realistic, legitimate paths people use to monetize a free tool like this:
 
 - **Premium templates / theme packs** — keep the core free, sell polished designer templates.
-- **Hosted "Pro" tier** — a paid version that stores resumes in the cloud, adds team features, or bundles AI credits so users don't need their own key.
+- **Hosted "Pro" tier** — cloud sync, team features, or bundled AI credits so users don't need their own key.
 - **Affiliate & partnerships** — job boards, ATS-friendly checks, interview-prep tools.
 - **Sponsorship / GitHub Sponsors** — if the project gets traction.
 - **Done-for-you services** — sell resume reviews or writing on top of the free tool.
 
-⚠️ **Reality check:** there is no honest tool that "automatically makes $200K/month for free." Income from a project like this depends on building an audience, ranking in search, and converting a small percentage of free users into paying ones. Treat this repo as a solid, free starting point — the work that follows (marketing, SEO, customer support, iteration) is where revenue actually comes from.
+⚠️ **Reality check:** there is no honest tool that "automatically makes $200K/month for free." Income from a project like this depends on building an audience, ranking in search, and converting a small percentage of free users into paying ones. Treat this repo as a solid, free starting point — the work that follows (marketing, SEO, support, iteration) is where revenue actually comes from.
 
-## Roadmap ideas
+## Roadmap
 
-- [ ] More templates (two-column, photo header)
-- [ ] Multiple resume profiles
-- [ ] ATS keyword checker
-- [ ] Markdown / DOCX export
-- [ ] i18n (multi-language UI)
+- [x] More templates (two-column, photo header)
+- [x] Multiple resume profiles
+- [x] ATS keyword checker
+- [x] Markdown / Word (.doc) export
+- [x] i18n (multi-language UI) — English, Bahasa Indonesia, Español
+- [ ] Native `.docx` export (currently Word-compatible HTML `.doc`)
+- [ ] More templates (timeline, two-tone sidebar)
+- [ ] More UI languages
+- [ ] ATS check with weighted scoring & synonyms
 
 Contributions welcome — open an issue or PR.
 

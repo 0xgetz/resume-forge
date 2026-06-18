@@ -14,13 +14,38 @@
       <span class="brand-name">ResumeForge</span>
       <span class="badge">Free</span>
     </div>
+
+    <div class="toolgroup profiles">
+      <select id="profile-select" title="Switch profile"></select>
+      <button id="btn-new-profile" class="btn ghost sm" data-i18n="profile.new">New</button>
+      <button id="btn-rename-profile" class="btn ghost sm" data-i18n="profile.rename">Rename</button>
+      <button id="btn-delete-profile" class="btn ghost sm" data-i18n="profile.delete">Delete</button>
+    </div>
+
+    <div class="toolgroup">
+      <label class="lbl" data-i18n="lang.label">Lang</label>
+      <select id="lang-select">
+        <option value="en">English</option>
+        <option value="id">Bahasa Indonesia</option>
+        <option value="es">Español</option>
+      </select>
+    </div>
+
     <nav class="actions">
-      <button id="tab-resume" class="tab active" data-view="resume">Resume</button>
-      <button id="tab-cover" class="tab" data-view="cover">Cover Letter</button>
+      <button id="tab-resume" class="tab active" data-view="resume" data-i18n="tab.resume">Resume</button>
+      <button id="tab-cover" class="tab" data-view="cover" data-i18n="tab.cover">Cover Letter</button>
+      <button id="tab-ats" class="tab" data-view="ats" data-i18n="tab.ats">ATS Check</button>
       <span class="divider"></span>
-      <button id="btn-import" class="btn ghost" title="Import data from JSON">Import</button>
-      <button id="btn-export-json" class="btn ghost" title="Export data to JSON">Export</button>
-      <button id="btn-print" class="btn primary" title="Download / Print as PDF">Download PDF</button>
+      <button id="btn-import" class="btn ghost" data-i18n="btn.import">Import</button>
+      <button id="btn-export-json" class="btn ghost" data-i18n="btn.export">Export</button>
+      <div class="dropdown">
+        <button id="btn-download" class="btn primary" data-i18n="btn.download">Download ▾</button>
+        <div class="menu" id="download-menu" hidden>
+          <button data-dl="pdf" data-i18n="dl.pdf">PDF (print)</button>
+          <button data-dl="word" data-i18n="dl.word">Word (.doc)</button>
+          <button data-dl="md" data-i18n="dl.md">Markdown (.md)</button>
+        </div>
+      </div>
       <input type="file" id="file-import" accept="application/json" hidden />
     </nav>
   </header>
@@ -31,86 +56,106 @@
       <!-- Resume editor -->
       <div class="panel" id="panel-resume">
         <div class="field-row">
-          <label>Template</label>
+          <label data-i18n="field.template">Template</label>
           <select id="template-select">
             <option value="modern">Modern</option>
             <option value="classic">Classic</option>
             <option value="compact">Compact</option>
+            <option value="two-column">Two-column</option>
+            <option value="photo">Photo header</option>
           </select>
         </div>
         <div class="field-row">
-          <label>Accent color</label>
+          <label data-i18n="field.accent">Accent color</label>
           <input type="color" id="accent-color" value="#2563eb" />
+        </div>
+        <div class="field-row">
+          <label data-i18n="field.photo">Photo</label>
+          <span class="photo-controls">
+            <input type="file" id="f-photo" accept="image/*" />
+            <button id="f-photo-clear" class="btn ghost sm" hidden data-i18n="photo.remove">Remove</button>
+          </span>
         </div>
 
         <fieldset>
-          <legend>Personal details</legend>
-          <input id="f-name" placeholder="Full name" />
-          <input id="f-title" placeholder="Professional title (e.g. Senior Product Designer)" />
+          <legend data-i18n="legend.personal">Personal details</legend>
+          <input id="f-name" data-i18n-ph="ph.name" placeholder="Full name" />
+          <input id="f-title" data-i18n-ph="ph.title" placeholder="Professional title" />
           <div class="grid-2">
-            <input id="f-email" placeholder="Email" />
-            <input id="f-phone" placeholder="Phone" />
+            <input id="f-email" data-i18n-ph="ph.email" placeholder="Email" />
+            <input id="f-phone" data-i18n-ph="ph.phone" placeholder="Phone" />
           </div>
           <div class="grid-2">
-            <input id="f-location" placeholder="Location" />
-            <input id="f-website" placeholder="Website / LinkedIn" />
+            <input id="f-location" data-i18n-ph="ph.location" placeholder="Location" />
+            <input id="f-website" data-i18n-ph="ph.website" placeholder="Website / LinkedIn" />
           </div>
         </fieldset>
 
         <fieldset>
-          <legend>Professional summary</legend>
-          <textarea id="f-summary" rows="4" placeholder="A short paragraph summarizing your experience and strengths."></textarea>
+          <legend data-i18n="legend.summary">Professional summary</legend>
+          <textarea id="f-summary" rows="4" data-i18n-ph="ph.summary" placeholder="A short paragraph..."></textarea>
         </fieldset>
 
         <fieldset>
-          <legend>Work experience</legend>
+          <legend data-i18n="legend.experience">Work experience</legend>
           <div id="experience-list"></div>
-          <button class="btn ghost add" data-add="experience">+ Add experience</button>
+          <button class="btn ghost add" data-add="experience" data-i18n="add.experience">+ Add experience</button>
         </fieldset>
 
         <fieldset>
-          <legend>Education</legend>
+          <legend data-i18n="legend.education">Education</legend>
           <div id="education-list"></div>
-          <button class="btn ghost add" data-add="education">+ Add education</button>
+          <button class="btn ghost add" data-add="education" data-i18n="add.education">+ Add education</button>
         </fieldset>
 
         <fieldset>
-          <legend>Skills</legend>
-          <input id="f-skills" placeholder="Comma-separated, e.g. Figma, React, User Research" />
+          <legend data-i18n="legend.skills">Skills</legend>
+          <input id="f-skills" data-i18n-ph="ph.skills" placeholder="Comma-separated skills" />
         </fieldset>
       </div>
 
       <!-- Cover letter editor -->
       <div class="panel" id="panel-cover" hidden>
         <fieldset>
-          <legend>Cover letter target</legend>
+          <legend data-i18n="legend.covertarget">Cover letter target</legend>
           <div class="grid-2">
-            <input id="c-company" placeholder="Company name" />
-            <input id="c-role" placeholder="Role you're applying for" />
+            <input id="c-company" data-i18n-ph="ph.ccompany" placeholder="Company name" />
+            <input id="c-role" data-i18n-ph="ph.crole" placeholder="Role" />
           </div>
-          <input id="c-manager" placeholder="Hiring manager name (optional)" />
-          <textarea id="c-highlights" rows="3" placeholder="Key points to highlight (optional): biggest wins, why this company, etc."></textarea>
+          <input id="c-manager" data-i18n-ph="ph.cmanager" placeholder="Hiring manager (optional)" />
+          <textarea id="c-highlights" rows="3" data-i18n-ph="ph.chighlights" placeholder="Key points to highlight"></textarea>
         </fieldset>
 
         <fieldset>
-          <legend>AI assist <span class="muted">(optional, bring your own key)</span></legend>
-          <p class="hint">Your key is stored only in this browser (localStorage) and is sent directly to the provider you choose. It never touches any ResumeForge server — there is no server.</p>
+          <legend><span data-i18n="legend.aiassist">AI assist</span> <span class="muted" data-i18n="ai.note">(optional, bring your own key)</span></legend>
+          <p class="hint" data-i18n="ai.hint">Your key is stored only in this browser.</p>
           <div class="field-row">
-            <label>Provider</label>
+            <label data-i18n="field.provider">Provider</label>
             <select id="ai-provider">
               <option value="openai">OpenAI</option>
               <option value="anthropic">Anthropic (Claude)</option>
             </select>
           </div>
-          <input id="ai-key" type="password" placeholder="API key (sk-... )" />
-          <button id="btn-generate" class="btn primary full">✨ Generate cover letter draft</button>
+          <input id="ai-key" type="password" data-i18n-ph="ph.aikey" placeholder="API key" />
+          <button id="btn-generate" class="btn primary full" data-i18n="btn.generate">✨ Generate cover letter draft</button>
           <p id="ai-status" class="hint"></p>
         </fieldset>
 
         <fieldset>
-          <legend>Cover letter text</legend>
-          <textarea id="c-body" rows="14" placeholder="Write or generate your cover letter here..."></textarea>
+          <legend data-i18n="legend.coverbody">Cover letter text</legend>
+          <textarea id="c-body" rows="14" data-i18n-ph="ph.cbody" placeholder="Write or generate..."></textarea>
         </fieldset>
+      </div>
+
+      <!-- ATS editor -->
+      <div class="panel" id="panel-ats" hidden>
+        <fieldset>
+          <legend data-i18n="legend.atstitle">ATS keyword check</legend>
+          <p class="hint" data-i18n="ats.desc">Paste a job description.</p>
+          <textarea id="ats-jd" rows="9" data-i18n-ph="ph.atsjd" placeholder="Paste the job description here..."></textarea>
+          <button id="btn-analyze" class="btn primary full" data-i18n="btn.analyze">Analyze match</button>
+        </fieldset>
+        <div id="ats-results"></div>
       </div>
     </section>
 
@@ -121,9 +166,10 @@
   </main>
 
   <footer class="footer">
-    <span>ResumeForge · 100% free &amp; open source · Your data stays in your browser.</span>
+    <span data-i18n="footer.text">ResumeForge · 100% free &amp; open source · Your data stays in your browser.</span>
   </footer>
 
+  <script src="i18n.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
